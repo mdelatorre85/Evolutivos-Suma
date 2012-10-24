@@ -53,8 +53,8 @@ public class SimpleItem extends Item {
 			uno.fitness();
 			dos.fitness();
 
-			uno = (SimpleItem) uno.localSearch();
-			dos = (SimpleItem) dos.localSearch();
+			// uno = (SimpleItem) uno.localSearch();
+			// dos = (SimpleItem) dos.localSearch();
 
 			retorno.add(uno);
 			retorno.add(dos);

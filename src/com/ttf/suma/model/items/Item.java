@@ -9,6 +9,8 @@ import com.ttf.suma.model.Target;
 public abstract class Item implements Serializable, Comparable<Item> {
 
 	private static final long serialVersionUID = -6208594491298428910L;
+
+	private static int MAXFITNESSVALUE = Integer.MIN_VALUE;
 	static final int LENGHT = 16;
 	static double MUTATIONPROBABILITY = 0.001d;
 	static double CROSSPROBABILITY = 0.8d;
@@ -31,6 +33,16 @@ public abstract class Item implements Serializable, Comparable<Item> {
 		return genotype;
 	}
 
+	private int maxFitnessValue() {
+		if (MAXFITNESSVALUE == Integer.MIN_VALUE) {
+			MAXFITNESSVALUE = 0;
+			for (int i = 0; i < LENGHT; i++) {
+				MAXFITNESSVALUE += i;
+			}
+		}
+		return MAXFITNESSVALUE;
+	}
+
 	public int fitness() {
 		fitnessValue = 0;
 		for (int i = 0; i < LENGHT; i++) {
@@ -39,7 +51,7 @@ public abstract class Item implements Serializable, Comparable<Item> {
 			}
 		}
 		fitnessValue -= Target.TARGET;
-		return Math.abs(fitnessValue);
+		return maxFitnessValue() - Math.abs(fitnessValue);
 	}
 
 	public abstract Item mutate();
